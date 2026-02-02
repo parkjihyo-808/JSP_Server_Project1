@@ -34,4 +34,21 @@ public enum _4_TodoService {
         ).collect(Collectors.toList());// mapToObj 닫기 태그, 반복문으로 각각의 todo 객체를 생성해서, 리스트로 만들기.
         return todoDTOS;
     } //getList 닫기
+
+    // 0202_모델 클래스 서비스 컨트롤러를 이용한 로직 처리 순서 5
+    // Todo 조회
+    public _3_TodoDTO get(Long tno){
+        // 반환할 임시 객체 생성
+        _3_TodoDTO dto = new _3_TodoDTO();
+        // 전달 받은 tno 번호로 임시 번호 설정,
+        dto.setTno(tno);
+        // 임시 제목
+        dto.setTitle("샘플 Todo 더미 데이터1");
+        // 임시 날짜, 현재 날짜,
+        dto.setDueDate(LocalDate.now());
+        // 임시 완료 여부,
+        dto.setFinished(true);
+
+        return dto;
+    }
 } //_4_TodoService 닫기
