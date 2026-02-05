@@ -45,7 +45,6 @@ dependencies {
 
     // 외부 기능 추가 4
     //Hikari Cp 설치
-    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '6.3.0'
 
     // 외부 기능 추가 5
