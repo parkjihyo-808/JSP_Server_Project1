@@ -147,14 +147,14 @@ public class _0203_4_TodoDAO {
 //     1행   4,샘플제목22,2026-02-03,0
 
         resultSet.next();
-        // 객체에 담기 위해서, 임시 객체를 생성, builder 패턴이용함.
-        _0203_1_TodoVO vo = _0203_1_TodoVO.builder()
-                .tno(resultSet.getLong("tno"))
-                .title(resultSet.getString("title"))
-                // 타입을 일치 시켜주기,
-                .dueDate(resultSet.getDate("dueDate").toLocalDate())
-                .finished(resultSet.getBoolean("finished"))
-                .build();
+            // 객체에 담기 위해서, 임시 객체를 생성, builder 패턴이용함.
+            _0203_1_TodoVO vo = _0203_1_TodoVO.builder()
+                    .tno(resultSet.getLong("tno"))
+                    .title(resultSet.getString("title"))
+                    // 타입을 일치 시켜주기,
+                    .dueDate(resultSet.getDate("dueDate").toLocalDate())
+                    .finished(resultSet.getBoolean("finished"))
+                    .build();
 
 
         return vo;

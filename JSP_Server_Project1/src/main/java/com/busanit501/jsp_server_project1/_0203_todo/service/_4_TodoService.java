@@ -1,6 +1,6 @@
 package com.busanit501.jsp_server_project1._0203_todo.service;
 
-import com.busanit501.jsp_server_project1._0202_todo.dto._3_TodoDTO;
+import com.busanit501.jsp_server_project1._0203_todo.dto._3_TodoDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,12 +35,12 @@ public enum _4_TodoService {
         return todoDTOS;
     } //getList 닫기
 
-    // 0202_모델 클래스 서비스 컨트롤러를 이용한 로직 처리 순서 5
-    // Todo 조회
-    public _3_TodoDTO get(Long tno){
+    // 0202_모델클래스_서비스_컨트롤러를_이용한_로직 처리_순서5
+    //Todo 조회
+    public _3_TodoDTO get(Long tno) {
         // 반환할 임시 객체 생성
         _3_TodoDTO dto = new _3_TodoDTO();
-        // 전달 받은 tno 번호로 임시 번호 설정,
+        // 전달 받은  tno 번호로 임시 번호 설정,
         dto.setTno(tno);
         // 임시 제목
         dto.setTitle("샘플 Todo 더미 데이터1");
@@ -51,4 +51,6 @@ public enum _4_TodoService {
 
         return dto;
     }
+
+
 } //_4_TodoService 닫기

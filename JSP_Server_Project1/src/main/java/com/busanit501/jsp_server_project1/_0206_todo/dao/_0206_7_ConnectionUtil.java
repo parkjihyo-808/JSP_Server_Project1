@@ -1,18 +1,20 @@
-package com.busanit501.jsp_server_project1._0203_todo.dao;
+package com.busanit501.jsp_server_project1._0206_todo.dao;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.Connection;
 
-public enum _0203_3_ConnectionUtil {
+@Log4j2
+public enum _0206_7_ConnectionUtil {
 
     INSTANCE;
 
     private HikariDataSource ds; // DB 연결하는 도구.
 
     // 생성자
-    _0203_3_ConnectionUtil() {
+    _0206_7_ConnectionUtil() {
         // HikariConfig 클래스 이용해서, 옵션 설정.
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
@@ -35,6 +37,14 @@ public enum _0203_3_ConnectionUtil {
 
     public Connection getConnection() throws  Exception {
         return ds.getConnection();
+    }
+
+    // 닫는 메서드 추가.
+    public void closePool() {
+        if (ds != null && !ds.isClosed()) {
+            ds.close(); // 풀 전체 종료
+            log.info("HikariCP 커넥션 풀을 종료했습니다.");
+        }
     }
 
 }

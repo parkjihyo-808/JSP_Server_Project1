@@ -1,7 +1,7 @@
 package com.busanit501.jsp_server_project1._0203_todo;
 
-import com.busanit501.jsp_server_project1._0202_todo.dto._3_TodoDTO;
-import com.busanit501.jsp_server_project1._0202_todo.service._4_TodoService;
+import com.busanit501.jsp_server_project1._0203_todo.dto._3_TodoDTO;
+import com.busanit501.jsp_server_project1._0203_todo.service._4_TodoService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class _3_TodoReadController extends HttpServlet {
         req.setAttribute("dto", dto);
 
         // 화면에 전달
-        req.getRequestDispatcher("/WEB-INF/_0202_todo/_3_todoRead.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/_0202_todo/_3_menuRead.jsp").forward(req,resp);
     }
 
 }
