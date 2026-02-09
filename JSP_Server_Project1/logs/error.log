@@ -1,0 +1,10 @@
+11:49:10.637 [Test worker] INFO  com.busanit501.jsp_server_project1.service._0204_6_TodoServiceTests-로그 라이브러리 log4j2 기능 테스트
+11:49:10.643 [Test worker] INFO  com.busanit501.jsp_server_project1.service._0204_6_TodoServiceTests-_0204_1_TodoDTO(tno=null, title=샘플 제목, 오늘 점심 뭐 먹지?, dueDate=2026-02-04, finished=true)
+10:55:16.118 [Test worker] INFO  com.busanit501.jsp_server_project1.service._0209_22_MemberServiceTests-멤버 서비스 로그인 테스트 memberDTO: _0209_18_MemberDTO(mid=pjh, mpw=1234, mname=박지효1)
+10:55:26.014 [Test worker] INFO  com.busanit501.jsp_server_project1.service._0209_22_MemberServiceTests-멤버 서비스 로그인 테스트 memberDTO: _0209_18_MemberDTO(mid=pjh, mpw=1234, mname=박지효1)
+15:26:59.592 [Test worker] INFO  com.busanit501.jsp_server_project1.dao._0209_20_MemberDAOTests-임시 로그인, 유저 조회 결과 : _0209_17_MemberVO(mid=pjh, mpw=1234, mname=박지효1, uuid=null)
+15:27:15.350 [Test worker] INFO  com.busanit501.jsp_server_project1.dao._0209_20_MemberDAOTests-임시 로그인, 유저 조회 결과 : _0209_17_MemberVO(mid=pjh, mpw=1234, mname=박지효1, uuid=null)
+15:27:36.769 [Test worker] INFO  com.busanit501.jsp_server_project1.dao._0209_20_MemberDAOTests-임시 로그인, 유저 조회 결과 : _0209_17_MemberVO(mid=pjh, mpw=1234, mname=박지효1, uuid=null)
+15:27:38.963 [Test worker] INFO  com.busanit501.jsp_server_project1.dao._0209_20_MemberDAOTests-임시 로그인, 유저 조회 결과 : _0209_17_MemberVO(mid=pjh, mpw=1234, mname=박지효1, uuid=null)
+15:28:14.223 [Test worker] INFO  com.busanit501.jsp_server_project1.dao._0209_20_MemberDAOTests-임시 로그인, 유저 조회 결과 : _0209_17_MemberVO(mid=pjh, mpw=1234, mname=박지효1, uuid=null)
+15:41:20.253 [Test worker] INFO  com.busanit501.jsp_server_project1.service._0209_22_MemberServiceTests-uuid 를 이용한 조회 멤버 서비스 로그인 테스트2 memberDTO: _0209_18_MemberDTO(mid=pjh, mpw=1234, mname=박지효1, uuid=779ba66f-b4d9-4d82-af9e-d9c066bf707f)

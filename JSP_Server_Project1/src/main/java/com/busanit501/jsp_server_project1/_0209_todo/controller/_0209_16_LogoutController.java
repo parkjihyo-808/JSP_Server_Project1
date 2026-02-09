@@ -23,20 +23,21 @@ public class _0209_16_LogoutController extends HttpServlet {
         // 적용하기.
         session.invalidate();
 
-        // 정상 로그아웃한다면, 쿠키의 remember-me 삭제도 같이 해야, 정상 로그아웃.
-        // 2. remember-me 쿠키 삭제 로직 추가
-        // 기존에 만든 findCookie 메서드를 활용하거나 직접 생성하여 전송합니다.
-        Cookie rememberCookie = findCookie(req.getCookies(), "remember-me");
+        // remember-me 쿠키 삭제
+        // 1. 같은 이름의 빈 쿠키를 새로 생성
+        Cookie killCookie = new Cookie("remember-me", "");
 
-        // 쿠키의 수명을 0으로 설정 (삭제 효과)
-        rememberCookie.setMaxAge(0);
-        rememberCookie.setPath("/");
+        // 2. 경로를 기존과 동일하게 설정
+        killCookie.setPath("/");
 
-        // 응답 헤더에 추가하여 브라우저의 쿠키를 갱신(삭제)
-        resp.addCookie(rememberCookie);
+        // 3. 수명을 0으로 설정하여 즉시 삭제 명령
+        killCookie.setMaxAge(0);
 
-        // 리다이렉트
-        resp.sendRedirect("/login_0209");
+        // 4. 응답에 실어서 브라우저에 전송(삭제 완료)
+        resp.addCookie(killCookie);
+
+        // 5. 경로 앞에 프로젝트 이름을 자동으로 붙여주는 코드
+        resp.sendRedirect(req.getContextPath() + "/login_0209");
 
     }
 
