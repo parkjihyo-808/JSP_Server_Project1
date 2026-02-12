@@ -27,7 +27,7 @@ public class _0209_13_LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        log.info("로그인 처리를 담당하느 doPost 입니다. ");
+        log.info("로그인 처리를 담당하는 doPost 입니다. ");
 
         // 화면에서, 전달받은 mid, mpw 정보를 가져오기. 무조건 문자열이다.
         String mid = req.getParameter("mid");
