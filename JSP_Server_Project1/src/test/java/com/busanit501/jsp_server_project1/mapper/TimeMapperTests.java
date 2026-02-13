@@ -1,6 +1,7 @@
 package com.busanit501.jsp_server_project1.mapper;
 
-import com.busanit501.jsp_server_project1.springex_0212.mapper.TimeMapper;
+
+import com.busanit501.jsp_server_project1.springex_0213_keep.mapper.TimeMapper2;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,11 +17,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class TimeMapperTests {
 
     @Autowired(required = false)
-// 해당 객체를 활성화를 못하더래도, 예외를 발생 안시키고, null 로 할당 하겠다.
-    private TimeMapper timeMapper;
+    // 해당 객체를 활성화를 못하더래도, 예외를 발생 안시키고, null 로 할당 하겠다.
+    private TimeMapper2 timeMapper2;
 
     @Test
     public void testGetTime() {
-        log.info("시간 확인으로 마이바티스 임시 연결 확인 : " + timeMapper.getTime());
+        log.info("시간 확인으로 마이바티스 임시 연결 확인 : " + timeMapper2.getNow());
     }
+
 }

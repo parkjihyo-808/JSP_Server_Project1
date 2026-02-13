@@ -22,3 +22,7 @@
 15:35:06.024 [Test worker] INFO  com.busanit501.jsp_server_project1.sample.SampleTests-실제 객체가 활성화가 되었는지 여부를 객체를 조회해보기,_2_SampleService_0212(sampleDAO0212=com.busanit501.jsp_server_project1.springex_0212.sample._3_SampleDAOImpl_0212@36fcf6c0)
 15:40:15.464 [Test worker] INFO  com.busanit501.jsp_server_project1.sample.SampleTests-testConnection : HikariProxyConnection@69160933 wrapping org.mariadb.jdbc.Connection@4f966719
 16:34:16.814 [Test worker] INFO  com.busanit501.jsp_server_project1.mapper.TimeMapperTests-시간 확인으로 마이바티스 임시 연결 확인 : 2026-02-12 16:34:16
+16:47:06.631 [Test worker] INFO  com.busanit501.jsp_server_project1.mapper.TimeMapperTests-시간 확인으로 마이바티스 임시 연결 확인 : 2026-02-12 16:47:06
+16:47:37.937 [Test worker] INFO  com.busanit501.jsp_server_project1.sample.SampleTests-testConnection : HikariProxyConnection@1273675500 wrapping org.mariadb.jdbc.Connection@d48673
+16:47:37.957 [Test worker] INFO  com.busanit501.jsp_server_project1.sample.SampleTests-실제 객체가 활성화가 되었는지 여부를 객체를 조회해보기,_2_SampleService_0212(sampleDAO0212=com.busanit501.jsp_server_project1.springex_0212.sample._3_SampleDAOImpl_0212@46185a1b)
+11:13:36.935 [Test worker] INFO  com.busanit501.jsp_server_project1.mapper.TimeMapperTests-시간 확인으로 마이바티스 임시 연결 확인 : 2026-02-13 11:13:36
