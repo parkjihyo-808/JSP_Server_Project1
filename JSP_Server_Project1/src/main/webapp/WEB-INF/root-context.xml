@@ -60,6 +60,8 @@
     <!--    그래서, 시스템에 등록해서 이용해야함. -->
     <!--    결론, 우리는 이방식으로 안하고, 파일 분리 형식으로 작업 할 예정. -->
     <mybatis:scan base-package="com.busanit501.jsp_server_project1.springex_new_0219_keep.mapper"></mybatis:scan>
+
     <context:component-scan base-package="com.busanit501.jsp_server_project1.springex_new_0219_keep.config"/>
+    <context:component-scan base-package="com.busanit501.jsp_server_project1.springex_new_0219_keep.service"/>
 
 </beans>

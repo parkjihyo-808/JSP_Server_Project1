@@ -1,8 +1,7 @@
-package com.busanit501.jsp_server_project1.mapper;
+package com.busanit501.jsp_server_project1.service;
 
-
-import com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO;
-import com.busanit501.jsp_server_project1.springex_new_0219_keep.mapper.TodoMapper;
+import com.busanit501.jsp_server_project1.springex_new_0219_keep.dto.TodoDTO;
+import com.busanit501.jsp_server_project1.springex_new_0219_keep.service.TodoService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,25 +16,25 @@ import java.time.LocalDate;
 @ExtendWith(SpringExtension.class) // Junit5 단위 테스트 기능 통합 설정
 // 빈을 등록한 파일의 위치를 지정, 단위 테스트 할 때, 해당파일를 참고해서, 테스트해줘.
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
-public class TodoMapperTests {
+public class TodoServiceTests {
+    // 외부 기능을 담당하는 클래스를 가져오기.
 
-    @Autowired(required = false)
-    // 해당 객체를 활성화를 못하더래도, 예외를 발생 안시키고, null 로 할당 하겠다.
-    private TodoMapper todoMapper;
-
-    @Test
-    public void testGetTime() {
-        log.info("시간 확인으로 마이바티스 임시 연결 확인 : " + todoMapper.getTime());
-    }
+    // 서비스 기능을 담당하는 클래스 불러오기.
+    // 전역으로 선언만 하구요, 실제 사용은 밑에서 초기화해서, 사용할수 있는 형태로 만들기.
+    @Autowired
+    private TodoService todoService;
 
     @Test
-    public void testInsert() {
+    public void testRegister() {
+        //준비물. , 화면에서 넘겨받은 데이터, 임시 더미데이터, 하드코딩.
         // 준비물, 화면에서 넘겨받은 TodoVO 있다고 가정, 또는 더미 데이터 준비.
-        TodoVO todoVO = TodoVO.builder()
-                .title("오늘 점심 뭐 먹죠?")
+        TodoDTO todoDTO = TodoDTO.builder()
+                .title("오늘 점심 뭐 먹죠2?")
                 .dueDate(LocalDate.now())
-                .writer("박지효")
+                .writer("박지효2")
                 .build();
-        todoMapper.insert(todoVO);
+        todoService.register(todoDTO);
+
     }
+
 }

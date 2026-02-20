@@ -8,4 +8,10 @@
     <select id="getTime" resultType="string">
         select now()
     </select>
+    <!--    여러 개의 sql 문장을 여기에 등록할 예정-->
+    <!--    insert 추가 작업-->
+    <!--    TodoMapper 인터페이스 안에 있는 매서드 이름과 동일-->
+    <insert id="insert">
+        insert into tbl_todo (title, dueDate, writer) values ( #{title}, #{dueDate}, #{writer})
+    </insert>
 </mapper>
