@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>임시리스트</title>
+    <title>임시하나조회</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -53,35 +53,52 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        전체목록
+                        하나 조회
                     </div>
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">Tno</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Writer</th>
-                                <th scope="col">DueDate</th>
-                                <th scope="col">Finished</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${dtoList}" var="dto">
-                                <tr>
-                                    <th><c:out value="${dto.tno}"/></th>
-                                    <td>
-                                        <a href="/todo2/read?tno=${dto.tno}" class="text-decoration-none">
-                                            <c:out value="${dto.title}"/>
-                                        </a>
-                                    </td>
-                                    <td><c:out value="${dto.writer}"/></td>
-                                    <td><c:out value="${dto.dueDate}"/></td>
-                                    <td><c:out value="${dto.finished}"/></td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                        <%--                            부트스트랩 이용중이고, 폼 컨트롤 하나씩 적용해보기.--%>
+                        <%--                        상세보기 화면, 디비로 부터 전달 받은 데이터를 읽기 전용으로 화면에 표시하는게 목적. --%>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Tno:</span>
+                            <input class="form-control" type="text" name="tno"
+                                   value=<c:out value="${dto.tno}"></c:out> readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Title:</span>
+                            <input class="form-control" type="text" name="title"
+                                   value=<c:out value="${dto.title}"></c:out> readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">DueDate: </span>
+                            <input class="form-control" type="date" name="dueDate"
+                                   value=<c:out value="${dto.dueDate}"></c:out> readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"> Writer:  </span>
+                            <input class="form-control" type="text" name="writer"
+                                   value=<c:out value="${dto.writer}"></c:out> readonly>
+                        </div>
+                        <div class="form-check mb-3">
+                            <span class="form-check-label">  Finished:  </span>
+                            <input class="form-check-input" type="checkbox" name="finished"
+                            ${dto.finished? "checked" :""}>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" type="button">수정하기</button>
+                            <button class="btn btn-secondary" type="button">목록가기</button>
+                        </div>
+                        <script>
+                            //목록가기
+                            document.querySelector(".btn-secondary").addEventListener("click", function (e) {
+                                    self.location = "/todo2/list"
+                                },false
+                            )
+                            //수정폼 가기.
+                            document.querySelector(".btn-primary").addEventListener("click", function (e) {
+                                    self.location = "/todo2/modify?tno=" + ${dto.tno}
+                                },false
+                            )
+                        </script>
                     </div>
                 </div>
             </div>
