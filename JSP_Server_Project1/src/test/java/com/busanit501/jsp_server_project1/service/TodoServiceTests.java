@@ -1,5 +1,7 @@
 package com.busanit501.jsp_server_project1.service;
 
+import com.busanit501.jsp_server_project1.springex_new_0219_keep.dto.PageRequestDTO;
+import com.busanit501.jsp_server_project1.springex_new_0219_keep.dto.PageResponseDTO;
 import com.busanit501.jsp_server_project1.springex_new_0219_keep.dto.TodoDTO;
 import com.busanit501.jsp_server_project1.springex_new_0219_keep.service.TodoService;
 import lombok.extern.log4j.Log4j2;
@@ -32,7 +34,7 @@ public class TodoServiceTests {
         TodoDTO todoDTO = TodoDTO.builder()
                 .title("오늘 점심 뭐 먹죠2-0223?")
                 .dueDate(LocalDate.now())
-                .writer("박지효2")
+                .writer("이상용2")
                 .build();
         todoService.register(todoDTO);
     }
@@ -50,4 +52,41 @@ public class TodoServiceTests {
         log.info(todoDTO);
     }
 
+    @Test
+    public void testDeleteOne() {
+        // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
+        todoService.remove(15L);
+    }
+
+    @Test
+    public void testUpdate() {
+        // 준비물, 화면에서 넘겨받은 TodoVO 있다고 가정, 또는 더미 데이터 준비.
+        // 수정, 기존에 DB 내용으로 선택? (각자다름)
+        TodoDTO todoDTO = TodoDTO.builder()
+                .tno(15L)
+                .title("오늘 점심 뭐 먹죠2 수정 서비스 테스트-0224?")
+                .finished(true)
+                .dueDate(LocalDate.now())
+                .build();
+        todoService.modify(todoDTO);
+    }
+
+    @Test
+    public void testPaging() {
+        // 준비물 :
+        // 1) 화면으로부터 전달 받은 PageRequestDTO 필요.
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(2)
+                .size(10)
+                .build();
+        PageResponseDTO<TodoDTO> pageResponseDTO = todoService.getList(pageRequestDTO);
+        // pageResponseDTO, 박스의 내용물이 무엇 있나요? 페이징에 필요한 재료가 있다.
+        // 10개씩 나누어진 데이터, 총 갯수, 시작 , 끝나는 페이지
+        // 대표적으로 일단은 페이징 처리가 된 10개 데이터만 일단, 출력.
+        log.info("PageResponseDTO  담겨진 여러 가지 데이터들 중에서, 대표적으로 페이징 처리가 된 데이터 10개만 출력해보기.");
+        pageResponseDTO.getDtoList().stream().forEach(dtoDTO -> log.info(dtoDTO));
+        log.info("total : " + pageResponseDTO.getTotal());
+        log.info("start : " + pageResponseDTO.getStart());
+        log.info("end : " + pageResponseDTO.getEnd());
+    }
 }

@@ -2,6 +2,7 @@ package com.busanit501.jsp_server_project1.mapper;
 
 
 import com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO;
+import com.busanit501.jsp_server_project1.springex_new_0219_keep.dto.PageRequestDTO;
 import com.busanit501.jsp_server_project1.springex_new_0219_keep.mapper.TodoMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class TodoMapperTests {
         TodoVO todoVO = TodoVO.builder()
                 .title("오늘 점심 뭐 먹죠?0223")
                 .dueDate(LocalDate.now())
-                .writer("박지효")
+                .writer("이상용")
                 .build();
         todoMapper.insert(todoVO);
     }
@@ -49,8 +50,53 @@ public class TodoMapperTests {
     @Test
     public void testSelectOne() {
         // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
-        TodoVO todoVO = todoMapper.selectOne(15L);
+        TodoVO todoVO = todoMapper.selectOne(32L);
         log.info(todoVO);
+    }
+
+    @Test
+    public void testDeleteOne() {
+        // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
+        todoMapper.delete(38L);
+    }
+
+    @Test
+    public void testUpdate() {
+        // 준비물, 화면에서 넘겨받은 TodoVO 있다고 가정, 또는 더미 데이터 준비.
+        // 수정, 기존에 DB 내용으로 선택? (각자다름)
+        TodoVO todoVO = TodoVO.builder()
+                .tno(34L)
+                .title("오늘 점심 뭐 먹죠?0224")
+                .dueDate(LocalDate.now())
+                .finished(true)
+                .build();
+        todoMapper.update(todoVO);
+    }
+
+    // 페이징 처리가 된 목록 조회
+    @Test
+    public void testSelectList() {
+        // 화면에서 전달 받은 페이지네이션을 위한 준비물 , 준비.
+        PageRequestDTO pageRequestDTO =  PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+    }
+
+    // 전체 갯수
+    @Test
+    public void testSelectListCount() {
+        // 화면에서 전달 받은 페이지네이션을 위한 준비물 , 준비.
+        PageRequestDTO pageRequestDTO =  PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+        int resultCount = todoMapper.getCount(pageRequestDTO);
+        log.info("전체 갯수 : " + resultCount);
     }
 
 }
