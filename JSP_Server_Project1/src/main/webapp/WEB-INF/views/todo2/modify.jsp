@@ -59,6 +59,9 @@
                         <%--                            부트스트랩 이용중이고, 폼 컨트롤 하나씩 적용해보기.--%>
                         <%--                        상세보기 화면, 디비로 부터 전달 받은 데이터를 읽기 전용으로 화면에 표시하는게 목적. --%>
                         <form action="/todo2/modify" method="post">
+                            <%--                            페이지, 사이즈 정보를 숨겨서, 서버에 전달하기.--%>
+                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Tno:</span>
                                 <input class="form-control" type="text" name="tno"
@@ -89,7 +92,7 @@
                                 ${dto.finished? "checked" :""}>
                             </div>
                             <div>
-                                <button class="btn btn btn-danger" type="button">삭제하기</button>
+                                <button class="btn btn-danger" type="button">삭제하기</button>
                                 <button class="btn btn-primary" type="button">수정하기</button>
                                 <button class="btn btn-secondary" type="button">목록가기</button>
                             </div>
@@ -97,7 +100,7 @@
                         <script>
                             //목록가기
                             document.querySelector(".btn-secondary").addEventListener("click", function (e) {
-                                    self.location = "/todo2/list"
+                                    self.location = `/todo2/list?${pageRequestDTO.link}`
                                 }, false
                             )
                             //삭제하기. -> form 태그 내부에 액션의 주소 : /todo2/modify

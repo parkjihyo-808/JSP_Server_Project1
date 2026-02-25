@@ -36,7 +36,7 @@ public class TodoMapperTests {
         TodoVO todoVO = TodoVO.builder()
                 .title("오늘 점심 뭐 먹죠?0223")
                 .dueDate(LocalDate.now())
-                .writer("이상용")
+                .writer("박지효")
                 .build();
         todoMapper.insert(todoVO);
     }
@@ -50,14 +50,14 @@ public class TodoMapperTests {
     @Test
     public void testSelectOne() {
         // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
-        TodoVO todoVO = todoMapper.selectOne(32L);
+        TodoVO todoVO = todoMapper.selectOne(15L);
         log.info(todoVO);
     }
 
     @Test
     public void testDeleteOne() {
         // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
-        todoMapper.delete(38L);
+        todoMapper.delete(15L);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class TodoMapperTests {
         // 준비물, 화면에서 넘겨받은 TodoVO 있다고 가정, 또는 더미 데이터 준비.
         // 수정, 기존에 DB 내용으로 선택? (각자다름)
         TodoVO todoVO = TodoVO.builder()
-                .tno(34L)
+                .tno(15L)
                 .title("오늘 점심 뭐 먹죠?0224")
                 .dueDate(LocalDate.now())
                 .finished(true)
@@ -96,7 +96,27 @@ public class TodoMapperTests {
                 .build();
 
         int resultCount = todoMapper.getCount(pageRequestDTO);
-        log.info("전체 갯수 : " + resultCount);
+        log.info("전체 갯수: " + resultCount);
     }
 
+    // 타입에 따른 검색 연습,
+    @Test
+    public void testSelectSearch() {
+        // 검색시 준비물, 검색어 , 타입
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .types(new String[]{"t","w"})
+                .keyword("점심")
+                .finished(true)
+                .from(LocalDate.of(2026,02,01))
+                .to(LocalDate.of(2026,02,28))
+                .build();
+
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        voList.forEach(vo -> log.info(vo));
+
+        // 전체 갯수
+        log.info(todoMapper.getCount(pageRequestDTO));
+    }
 }

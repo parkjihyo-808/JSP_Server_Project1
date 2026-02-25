@@ -90,12 +90,13 @@
                         <script>
                             //목록가기
                             document.querySelector(".btn-secondary").addEventListener("click", function (e) {
-                                    self.location = "/todo2/list"
+                                    self.location = "/todo2/list?${pageRequestDTO.link}"
                                 },false
                             )
                             //수정폼 가기.
                             document.querySelector(".btn-primary").addEventListener("click", function (e) {
-                                    self.location = "/todo2/modify?tno=" + ${dto.tno}
+                                    <%--self.location = "/todo2/modify?tno=" + ${dto.tno}--%>
+                                    self.location = `/todo2/modify?tno=${dto.tno}&${pageRequestDTO.link}`
                                 },false
                             )
                         </script>

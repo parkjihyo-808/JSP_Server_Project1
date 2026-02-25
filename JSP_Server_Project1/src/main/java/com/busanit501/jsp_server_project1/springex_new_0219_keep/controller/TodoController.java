@@ -45,6 +45,7 @@ public class TodoController {
     // 화면으로 부터, 보고 있는 페이지 번호를 받는다, page, size 받는다, 낱개로 받기 싫어서, DTO 로 받는다.
     // PageRequestDTO
     @RequestMapping("/list")
+    //  스프링에서는 기본적으로 매개변수의 클래스 타입을 화면으로 전달함: PageRequestDTO pageRequestDTO
     public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult,
                      Model model) {
         log.info("pageRequestDTO : " + pageRequestDTO);
@@ -66,7 +67,10 @@ public class TodoController {
     // 재사용,
     // modify.jsp 화면만 추가하면됨. (read.jsp, modify.jsp 화면이 거의 비슷함), 재사용.
     @GetMapping({"/read", "/modify"})
-    public void read(Long tno, Model model) {
+//    public void read(Long tno, Model model) {
+    //  스프링에서는 기본적으로 매개변수의 클래스 타입을 화면으로 전달함: PageRequestDTO pageRequestDTO
+    // 서버 -> 화면으로, 해당 데이터 전달 : pageRequestDTO
+    public void read(Long tno, PageRequestDTO pageRequestDTO, Model model) {
         log.info("todo2 read...");
         TodoDTO todoDTO = todoService.getOne(tno);
         // 서버 -> 화면에 데이터 목록들을 전달. 박스 이름 : dto, 내용물: DB에서 받아온 목록들
@@ -74,12 +78,19 @@ public class TodoController {
     }
 
     @PostMapping("/delete")
-    public String delete(Long tno, RedirectAttributes redirectAttributes) {
+    // 수정 화면에서, 삭제시 -> 히든으로 숨겨둔 페이지, 사이즈 정보를 , page, size 전달을 하면,
+    // PageRequestDTO 자동으로 데이터를 맵핑을 함.
+    public String delete(Long tno, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("삭제 포스트 처리 작업 ");
         log.info("삭제할 tno 번호 확인 : " + tno);
 
         // 실제 삭제 기능은 아직 미구현,
         todoService.remove(tno);
+
+        // 서버에서 -> 화면으로 데이터를 전달시, 쿼리 스트링으로 전달하는 방법.
+//        redirectAttributes.addAttribute("page",1); // 1페이지로 이동
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage()); // 현재 보고 있는 페이지로 이동.
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
 
         return "redirect:/todo2/list";
     }
@@ -121,6 +132,8 @@ public class TodoController {
     @PostMapping("/modify")
     // 유효성 체크시, 주의사항, !) @Valid TodoDTO todoDTO, BindingResult bindingResult, 순서 주의!!!
     public String postModify(@Valid TodoDTO todoDTO, BindingResult bindingResult,
+                             // 수정 화면에서, 수정시 -> 히든으로 숨겨둔 페이지, 사이즈 정보를 , page, size 전달을 하면,
+                             PageRequestDTO pageRequestDTO,
                              RedirectAttributes redirectAttributes) {
         log.info("todo2 register..post");
 
@@ -133,6 +146,8 @@ public class TodoController {
             // 서버에서 화면으로 임시 데이터를 전달. 박스이름: errors, 박스 내용물: 오류가 난 이유.
             redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
             redirectAttributes.addAttribute("tno", todoDTO.getTno());
+            redirectAttributes.addAttribute("page",pageRequestDTO.getPage()); // 현재 보고 있는 페이지로 이동.
+            redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
             return "redirect:/todo2/modify";
         }
 
@@ -141,8 +156,9 @@ public class TodoController {
         todoService.modify(todoDTO);
 
         log.info(" 유효성 통과한 데이터 todoDTO 2: " + todoDTO);
+        // 서버에서 -> 화면으로 데이터를 전달시, 쿼리 스트링으로 전달하는 방법.
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage()); // 현재 보고 있는 페이지로 이동.
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo2/list";
     }
-
-
 }

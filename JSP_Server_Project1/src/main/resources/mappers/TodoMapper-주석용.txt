@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--인텔리제이에서, 해당 경로 복사, , 해당 파일 우클릭, 참조 경로/복사해서, 맨밑에 -->
+<!--구분자가 점으로 된걸 이용하기.-->
+<mapper namespace="com.busanit501.jsp_server_project1.springex_new_0219_keep.mapper.TodoMapper">
+    <select id="getTime" resultType="string">
+        select now()
+    </select>
+<!--    여러 개의 sql 문장을 여기에 등록할 예정-->
+<!--    insert 추가 작업 -->
+<!--    TodoMapper 인터페이스 안에 있는 메서드이름과 동일-->
+    <insert id="insert">
+        insert into tbl_todo (title, dueDate, writer, finished) values ( #{title}, #{dueDate}, #{writer}, #{finished})
+    </insert>
+
+    <select id="selectAll" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">
+        select * from tbl_todo order by tno desc
+    </select>
+
+    <select id="selectOne" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">
+        select * from tbl_todo where tno = #{tno}
+    </select>
+
+    <delete id="delete">
+        delete from tbl_todo where tno = #{tno}
+    </delete>
+
+    <update id="update">
+        update tbl_todo set title = #{title}, dueDate = #{dueDate}, finished = #{finished} where tno = #{tno}
+    </update>
+
+<!--    기본 전체 조회1-->
+<!--    <select id="selectList" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">-->
+<!--        select * from tbl_todo order by tno desc limit #{skip}, #{size}-->
+<!--    </select>-->
+
+<!--    검색, 필터 , 타입 조건 1-->
+<!--    <select id="selectList" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">-->
+<!--        select * from tbl_todo-->
+<!--        <foreach collection="types" item="type">-->
+<!--            #{type}-->
+<!--        </foreach>-->
+<!--        order by tno desc limit #{skip}, #{size}-->
+<!--    </select>-->
+
+    <!--    검색, 필터 , 타입 조건 2, 조건문 추가 -->
+<!--    <select id="selectList" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">-->
+<!--        select * from tbl_todo-->
+<!--        <foreach collection="types" item="type">-->
+<!--            <if test="type == 't'.toString()">-->
+<!--                title like concat('%',#{keyword},'%')-->
+<!--            </if>-->
+<!--            <if test="type == 'w'.toString()">-->
+<!--                writer like concat('%',#{keyword},'%')-->
+<!--            </if>-->
+<!--        </foreach>-->
+<!--        order by tno desc limit #{skip}, #{size}-->
+<!--    </select>-->
+
+    <!--    검색, 필터 , 타입 조건 3, or 추가 -->
+<!--    <select id="selectList" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">-->
+<!--        select * from tbl_todo-->
+<!--        <foreach collection="types" item="type" open="(" close=")" separator=" OR " >-->
+<!--            <if test="type == 't'.toString()">-->
+<!--                title like concat('%',#{keyword},'%')-->
+<!--            </if>-->
+<!--            <if test="type == 'w'.toString()">-->
+<!--                writer like concat('%',#{keyword},'%')-->
+<!--            </if>-->
+<!--        </foreach>-->
+<!--        order by tno desc limit #{skip}, #{size}-->
+<!--    </select>-->
+
+<!--    <select id="getCount" resultType="int">-->
+<!--        select count(tno) from tbl_todo-->
+<!--    </select>-->
+
+    <!--    검색, 필터 , 타입 조건 4, where 추가 -->
+    <select id="selectList" resultType="com.busanit501.jsp_server_project1.springex_new_0219_keep.domain.TodoVO">
+        select * from tbl_todo
+        <where>
+            <if test="types != null and types.length > 0">
+                <foreach collection="types" item="type" open="(" close=")" separator=" OR ">
+                    <if test="type == 't'.toString()">
+                        title like concat('%',#{keyword},'%')
+                    </if>
+                    <if test="type == 'w'.toString()">
+                        writer like concat('%',#{keyword},'%')
+                    </if>
+                </foreach>
+            </if>
+            order by tno desc limit #{skip}, #{size}
+        </where>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(tno) from tbl_todo
+    </select>
+
+</mapper>

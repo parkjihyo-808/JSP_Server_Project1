@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.util.Arrays;
 
 @Builder
 @Data
@@ -28,8 +30,44 @@ public class PageRequestDTO {
     @Positive
     private int size = 10;
 
+    // 보고 있는 페이지의 정보를, URL 주소 뒤에 , ?page=3&size=10, 내용을 첨부하고 싶다.
+    private String link;
+
+    public String getLink() {
+        if(link == null) {
+            // 기본 : String, 불변, 객체를 새로 생성할 때마다, 새로운 메모리를 사용하고,
+            // StringBuilder, 기존 메모리에(변경없이) 작업 및 사용함, 메모리 절약 효과. 그래서, 사용함.
+            StringBuilder builder = new StringBuilder();
+            builder.append("page=" + this.page);
+            builder.append("&size=" + this.size);
+            link = builder.toString(); // link = "page=3&size=10"
+        }
+        return link;
+    }
+
     // 3) 몇개를 건너띄기 할건지.
     public int getSkip() {
         return (page -1) * 10;
+    }
+
+    // 검색 , 필터 이용시 필요한 준비물.
+    private String[] types;
+    // 검색어
+    private String keyword;
+    //완료여부
+    private boolean finished;
+    // 기간
+    private LocalDate from;
+    private LocalDate to;
+
+    // 검색시, 타입을 체크하는 기능 추가.
+    // 목록 화면에서, 해당 타입을 검사하는 용도로 사용할 예정,
+    public boolean checkType(String type) {
+        if(types == null || types.length ==0) {
+            return false;
+        }
+        // types = {"t", "w"}, types = {"t"}, types = {"w"}, types = {}
+        boolean result = Arrays.stream(types).anyMatch(type::equals);
+        return result;
     }
 }
